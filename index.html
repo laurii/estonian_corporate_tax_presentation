@@ -44,24 +44,17 @@
     <!-- SLIDES -->
     <slide class="" id="slide-1" style="background:;">
   <hgroup>
-    <h2>About the study</h2>
-  </hgroup>
-  <article data-timings="">
-    <p>The aim of this study is to give a short overview of Estonian corporates Tax Defaults 
-overview based on the publicly available data</p>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="class" id="id" style="background:;">
-  <hgroup>
     <h2>About the Estonia Tax system</h2>
   </hgroup>
   <article data-timings="">
     <p>The Estonian tax system consists of national taxes and local taxes collected by local governments in their jurisdiction. National taxes include income tax, social tax, land tax, gambling tax, value-added tax, duty and excise taxes and heavy goods vehicle tax. Local governments have the authority to impose local taxes, but effectively only a few have introduced local taxes, in particular: boat tax, advertisement tax, tax for closing of streets, motor vehicle tax, tax on keeping domestic animals, amusement tax, and parking fees.</p>
 
 <p>Estonia does not impose any gift, inheritance or estate taxes. Various transactions may be subject to payment of state fees (stamp duties).</p>
+
+<p>Estonia is a small country with 1.3 MIO citizens with the GDP of $36.947 billion.
+Estonia has shown its abilty to collect nearly all taxes.
+At the current stage - the tax GAP (non paid taxes) is about 300 MIO EUR per year
+Currently there is ca 110 MIO EUR defaults of taxes by Corporates</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -90,41 +83,14 @@ overview based on the publicly available data</p>
 
 <slide class="class" id="id" style="background:;">
   <hgroup>
-    <h2>Corporate Taxes in Estonia (cont)</h2>
-  </hgroup>
-  <article data-timings="">
-    <p>As the tax period of corporate entities is a month, the income tax shall be returned and paid monthly by the 10th day of the following month.</p>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="class" id="id" style="background:;">
-  <hgroup>
-    <h2>One of the most effcient tax system</h2>
-  </hgroup>
-  <article data-timings="">
-    <p>Estonia is a small country with 1.3 MIO citizens with the GDP of $36.947 billion.</p>
-
-<p>Estonia has shown its abilty to collect nearly all taxes.</p>
-
-<p>At the current stage - the tax GAP (non paid taxes) is about 300 MIO EUR per year</p>
-
-<p>Currently there is ca 110 MIO EUR defaults of taxes by Corporates</p>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="class" id="id" style="background:;">
-  <hgroup>
     <h2>Top Tax Default Companies</h2>
   </hgroup>
   <article data-timings="">
     <p>Top Companies with Defaulted Taxes</p>
 
 <pre><code class="r">library(data.table)
-DT &lt;- as.data.table(readRDS(&#39;../Estoninan_companies_tax_defaults_as_of_17.02.2015.rds&#39;))
+library(ggplot2)
+DT &lt;- as.data.table(readRDS(&#39;Estoninan_companies_tax_defaults_as_of_17.02.2015.rds&#39;))
 setnames(DT,c(&quot;RegistrationID&quot;, &quot;CompanyName&quot;,&quot;TaxSumInDefault&quot;,&quot;InclTaxSumInDispute&quot;,&quot;DefaultStartDate&quot;))
 head(DT[order(-rank(TaxSumInDefault))],n = 15)
 </code></pre>
@@ -172,8 +138,7 @@ head(DT[order(-rank(TaxSumInDefault))],n = 15)
     <h2>Tax defaults by first appearacne date</h2>
   </hgroup>
   <article data-timings="">
-    <pre><code class="r">library(ggplot2)
-qplot(x = DefaultStartDate,y = TaxSumInDefault,data=DT,xlab = &quot;Default Start Date&quot;, ylab = &quot;Tax Default in EUR&quot;, main = &quot;Tax Defaults by frist apparance date&quot;)
+    <pre><code class="r">qplot(x = DefaultStartDate,y = TaxSumInDefault,data=DT,xlab = &quot;Default Start Date&quot;, ylab = &quot;Tax Default in EUR&quot;, main = &quot;Tax Defaults by frist apparance date&quot;)
 </code></pre>
 
 <p><img src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"> </p>
@@ -182,31 +147,15 @@ qplot(x = DefaultStartDate,y = TaxSumInDefault,data=DT,xlab = &quot;Default Star
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="class" id="id" style="background:;">
-  <hgroup>
-    <h2>Tax defaults historgram for small defaults</h2>
-  </hgroup>
-  <article data-timings="">
-    <pre><code class="r">hist(DT[DT$TaxSumInDefault &lt; 100000,TaxSumInDefault],breaks=100,xlab = &quot;Tax default in EUR&quot;,ylab = &quot;Number of Companies&quot;, main = &quot;Companies Tax default &lt; 100000 EUR&quot;)
-</code></pre>
-
-<p><img src="assets/fig/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"> </p>
-
-<p>Companies with defaults smaller than 100&#39;000 EUR</p>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-9" style="background:;">
+<slide class="" id="slide-5" style="background:;">
   <hgroup>
     <h2>Tax defaults historgram for large defaults</h2>
   </hgroup>
   <article data-timings="">
-    <pre><code class="r">hist(DT[DT$TaxSumInDefault &gt; 100000,TaxSumInDefault],breaks=100,xlab = &quot;Tax default in EUR&quot;,ylab = &quot;Number of Companies&quot;, main = &quot;Companies Tax default &gt; 100000 EUR&quot;)
+    <pre><code class="r">hist(DT[TaxSumInDefault &gt; 100000,TaxSumInDefault],breaks=100, xlab = &quot;Tax default in EUR&quot;, ylab = &quot;Number of Companies&quot;, main = &quot;Companies Tax default &gt; 100000 EUR&quot;)
 </code></pre>
 
-<p><img src="assets/fig/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"> </p>
+<p><img src="assets/fig/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"> </p>
 
 <p>Companies with defaults bigger than 100&#39;000 EUR</p>
 
@@ -220,56 +169,32 @@ qplot(x = DefaultStartDate,y = TaxSumInDefault,data=DT,xlab = &quot;Default Star
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='About the study'>
+        data-slide=1 title='About the Estonia Tax system'>
          1
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='About the Estonia Tax system'>
+        data-slide=2 title='Corporate Taxes in Estonia'>
          2
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='Corporate Taxes in Estonia'>
+        data-slide=3 title='Top Tax Default Companies'>
          3
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='Corporate Taxes in Estonia (cont)'>
+        data-slide=4 title='Tax defaults by first appearacne date'>
          4
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=5 title='One of the most effcient tax system'>
+        data-slide=5 title='Tax defaults historgram for large defaults'>
          5
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=6 title='Top Tax Default Companies'>
-         6
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='Tax defaults by first appearacne date'>
-         7
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='Tax defaults historgram for small defaults'>
-         8
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='Tax defaults historgram for large defaults'>
-         9
       </a>
     </li>
   </ul>
