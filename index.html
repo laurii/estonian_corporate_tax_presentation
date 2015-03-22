@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Estonian Tax defaults</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Estonian Tax defaults">
+  <meta name="author" content="Lauri Ilison">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Estonian Tax defaults</h1>
+    <h2>Corporate Tax defaults data as of 19.02.2015</h2>
+    <p>Lauri Ilison<br/>Data Analyst</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>About the study</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The aim of this study is to give a short overview of Estonian corporates Tax Defaults 
+overview based on the publicly available data</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>About the Estonia Tax system</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The Estonian tax system consists of national taxes and local taxes collected by local governments in their jurisdiction. National taxes include income tax, social tax, land tax, gambling tax, value-added tax, duty and excise taxes and heavy goods vehicle tax. Local governments have the authority to impose local taxes, but effectively only a few have introduced local taxes, in particular: boat tax, advertisement tax, tax for closing of streets, motor vehicle tax, tax on keeping domestic animals, amusement tax, and parking fees.</p>
+
+<p>Estonia does not impose any gift, inheritance or estate taxes. Various transactions may be subject to payment of state fees (stamp duties).</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Corporate Taxes in Estonia</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Estonian resident companies and permanent establishments of the foreign entities (including branches) are subject to income tax only in respect of all distributed profits (both actual and deemed), including:</p>
+
+<ol>
+<li>corporate profits distributed in the tax period;</li>
+<li>gifts, donations and representation expenses;</li>
+<li>expenses and payments not related to business.</li>
+</ol>
+
+<p>Fringe benefits are taxable at the level of employer. The employer pays income tax and social tax on fringe benefits.</p>
+
+<p>All distributions are subject to income tax at the rate of 20% of the amount of taxable payment. The transfer of assets of the permanent establishment to its head office or to other companies is also treated like a distribution. As of 1 January 2009, dividends paid to non-residents are no longer subject to withholding tax at the general rate of 20%, irrespective of participation in the share capital of the distributing Estonian company. However, various withholding taxes may still apply to other payments to non-residents if they do not have a permanent establishment in Estonia or unless the tax treaties otherwise provide.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Corporate Taxes in Estonia (cont)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>As the tax period of corporate entities is a month, the income tax shall be returned and paid monthly by the 10th day of the following month.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>One of the most effcient tax system</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Estonia is a small country with 1.3 MIO citizens with the GDP of $36.947 billion.</p>
+
+<p>Estonia has shown its abilty to collect nearly all taxes.</p>
+
+<p>At the current stage - the tax GAP (non paid taxes) is about 300 MIO EUR per year</p>
+
+<p>Currently there is ca 110 MIO EUR defaults of taxes by Corporates</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Top Tax Default Companies</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Top Companies with Defaulted Taxes</p>
+
+<pre><code class="r">library(data.table)
+DT &lt;- as.data.table(readRDS(&#39;../Estoninan_companies_tax_defaults_as_of_17.02.2015.rds&#39;))
+setnames(DT,c(&quot;RegistrationID&quot;, &quot;CompanyName&quot;,&quot;TaxSumInDefault&quot;,&quot;InclTaxSumInDispute&quot;,&quot;DefaultStartDate&quot;))
+head(DT[order(-rank(TaxSumInDefault))],n = 15)
+</code></pre>
+
+<pre><code>##     RegistrationID                 CompanyName TaxSumInDefault
+##  1:       11330410                  TABEYO, OÜ       4053831.0
+##  2:       11413107         FUND INVESTMENTS OÜ       1650521.0
+##  3:       10259970          OZON MMG GRUPP, OÜ       1409109.0
+##  4:       10046635                 BITEST, TÜH       1380435.1
+##  5:       12584408           BALTIC TÖÖJÕUD OÜ       1148723.5
+##  6:       12603614          SIMETRA TÖÖJÕUD OÜ       1051713.8
+##  7:       11222270           ADRIAN ARENDUS OÜ        990663.0
+##  8:       11901539 VIVA ELEKTROONIKA PLUSS, OÜ        952075.0
+##  9:       10853672            ROSNEFT EESTI OÜ        835363.5
+## 10:       10934761            JALAKA INVEST OÜ        833897.7
+## 11:       10261486 INIMÕIGUSTE KAITSE BÜROO OÜ        800261.8
+## 12:       12102208           COMPUTER PARTS OÜ        738500.0
+## 13:       12237842                LOORVALT, OÜ        601880.6
+## 14:       11402380                 SIMCITY, OÜ        565108.8
+## 15:       11626263             RKO PLATVORM OÜ        543835.7
+##     InclTaxSumInDispute DefaultStartDate
+##  1:                 0.0       2012-02-20
+##  2:                 0.0       2013-05-10
+##  3:                 0.0       2012-01-10
+##  4:                 0.0       2013-06-17
+##  5:                 0.0       2014-02-10
+##  6:                 0.0       2014-12-22
+##  7:                 0.0       2012-09-20
+##  8:            141211.9       2011-09-20
+##  9:                 0.0       2007-05-21
+## 10:                 0.0       2013-05-20
+## 11:                 0.0       2007-04-20
+## 12:                 0.0       2011-07-20
+## 13:                 0.0       2012-04-10
+## 14:                 0.0       2013-01-10
+## 15:                 0.0       2009-12-21
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Tax defaults by first appearacne date</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(ggplot2)
+qplot(x = DefaultStartDate,y = TaxSumInDefault,data=DT,xlab = &quot;Default Start Date&quot;, ylab = &quot;Tax Default in EUR&quot;, main = &quot;Tax Defaults by frist apparance date&quot;)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Tax defaults historgram for small defaults</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">hist(DT[DT$TaxSumInDefault &lt; 100000,TaxSumInDefault],breaks=100,xlab = &quot;Tax default in EUR&quot;,ylab = &quot;Number of Companies&quot;, main = &quot;Companies Tax default &lt; 100000 EUR&quot;)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"> </p>
+
+<p>Companies with defaults smaller than 100&#39;000 EUR</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Tax defaults historgram for large defaults</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">hist(DT[DT$TaxSumInDefault &gt; 100000,TaxSumInDefault],breaks=100,xlab = &quot;Tax default in EUR&quot;,ylab = &quot;Number of Companies&quot;, main = &quot;Companies Tax default &gt; 100000 EUR&quot;)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"> </p>
+
+<p>Companies with defaults bigger than 100&#39;000 EUR</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='About the study'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='About the Estonia Tax system'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Corporate Taxes in Estonia'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Corporate Taxes in Estonia (cont)'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='One of the most effcient tax system'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Top Tax Default Companies'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Tax defaults by first appearacne date'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Tax defaults historgram for small defaults'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Tax defaults historgram for large defaults'>
+         9
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+
+  <script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
